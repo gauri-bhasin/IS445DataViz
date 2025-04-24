@@ -1,0 +1,91 @@
+---
+title: "Assgn4"
+output: word_document
+date: "2025-04-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+if (!require("survival")) install.packages("survival")
+if (!require("survminer")) install.packages("survminer")
+
+# Load necessary libraries
+library(survival)
+library(survminer)
+
+# Read CSV
+df <- read.csv("employee_turnover-2.csv")
+
+# Inspect data
+head(df)
+str(df)
+
+# Convert variables to appropriate types
+df$stag <- as.numeric(df$stag)  
+df$event <- as.numeric(df$event) 
+df$gender <- as.factor(df$gender) 
+df$industry <- as.factor(df$industry)
+df$profession <- as.factor(df$profession)
+df$coach <- as.factor(df$coach)
+df$head_gender <- as.factor(df$head_gender)
+
+# Remove rows with missing stag or event
+df <- df[!is.na(df$stag) & !is.na(df$event), ]
+
+### Kaplan–Meier Survival Analysis
+
+# Create survival object
+surv_obj <- Surv(time = df$stag, event = df$event)
+
+# Fit Kaplan–Meier curve stratifying by gender
+km_fit <- survfit(surv_obj ~ gender, data = df)
+
+# Plot survival curves with risk table
+km_plot <- ggsurvplot(
+  km_fit,
+  data = df,
+  risk.table = TRUE,
+  pval = TRUE,
+  conf.int = TRUE,
+  title = "Survival Analysis of Employee Turnover by Gender",
+  xlab = "Work Experience (months)",
+  ylab = "Probability of Remaining Employed",
+  palette = "Dark2"
+)
+
+# Print the Kaplan–Meier plot
+print(km_plot)
+
+### Cox Proportional Hazards Regression
+
+cox_model <- coxph(
+  surv_obj ~ gender + age + industry + profession + greywage +
+    extraversion + independ + selfcontrol + anxiety + novator,
+  data = df
+)
+
+# View summary of the Cox model
+summary(cox_model)
+```
+
+## Explanation
+
+From the Kaplan–Meier survival curve, I observed that the survival probability (i.e., the probability of remaining employed) generally decreases over time as expected. When comparing male and female employees, there is some difference in their likelihood of leaving the company at various points, but based on the p-value (displayed on the plot), the difference may or may not be statistically significant (in my example, the p-value was around 0.13, which is above the conventional 0.05 threshold).
+
+The risk table under the survival curve helps me see how many employees remain in the analysis at each time interval. This is particularly useful for gauging how the sample size changes over time.
+
+In the Cox Proportional Hazards model, the output provided hazard ratios (HR), confidence intervals, and p-values for each variable included in the model. For example, if greywage had an HR significantly greater than 1, it would suggest that employees with lower compensation (slightly above minimum wage) might be more likely to leave. If gender showed an HR significantly different from 1, that would suggest a gender-based difference in turnover risk.
+
+## Conclusion
+
+In conclusion, my survival analysis indicates that the probability of employees staying decreases over time, and while there might be differences by gender, they were not strongly statistically significant in this dataset. Through the Cox regression, I identified potential risk factors—such as pay level or certain personality traits—that could influence an employee’s likelihood of leaving. These insights can guide the company’s decisions, such as adjusting compensation, offering targeted training, or tailoring retention programs, to reduce turnover and retain employees for a longer period.
+
