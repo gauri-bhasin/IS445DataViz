@@ -19,7 +19,7 @@ This project explores gender-based salary disparities using real-world data from
 
 ## Dataset Overview
 
-* Source: Glassdoor salary dataset (from Kaggle)
+* Source: Glassdoor salary dataset ([from Kaggle](https://www.kaggle.com/datasets/nilimajauhari/glassdoor-analyze-gender-pay-gap))
 * Scope: Includes job titles, gender, salary, location, experience level, and employer reviews
 * Focus: Binary gender comparison (male and female)
 
