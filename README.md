@@ -58,7 +58,7 @@ This project explores gender-based salary disparities using real-world data from
 ## License
 
 This repository is for educational and non-commercial use only.
-Data rights belong to their respective original sources.
+
 
 
 
