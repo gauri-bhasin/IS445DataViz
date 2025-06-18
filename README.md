@@ -1,11 +1,11 @@
 
----
+
 
 # Gender Pay Analysis – Glassdoor
 
 This project explores gender-based salary disparities using real-world data from Glassdoor. It aims to determine whether statistically significant wage differences exist between men and women, and what factors may contribute to these gaps.
 
----
+
 
 ## Project Goals
 
@@ -15,7 +15,7 @@ This project explores gender-based salary disparities using real-world data from
 * Visualize insights to support understanding
 * Recommend actions for promoting pay equity
 
----
+
 
 ## Dataset Overview
 
@@ -23,7 +23,7 @@ This project explores gender-based salary disparities using real-world data from
 * Scope: Includes job titles, gender, salary, location, experience level, and employer reviews
 * Focus: Binary gender comparison (male and female)
 
----
+
 
 ## Methods Used
 
@@ -36,7 +36,7 @@ This project explores gender-based salary disparities using real-world data from
   * ANOVA (for comparing across multiple categories)
   * Linear Regression (to account for factors like experience and location)
 
----
+
 
 ## Key Insights
 
@@ -45,7 +45,7 @@ This project explores gender-based salary disparities using real-world data from
 * Even modest gaps, when consistent, can have long-term financial impact
 * Some employers displayed better equity practices based on compensation patterns and reviews
 
----
+
 
 ## Visualizations
 
@@ -53,12 +53,12 @@ This project explores gender-based salary disparities using real-world data from
 * Role-wise breakdowns with annotation of statistical outcomes
 * Regression plots with interpretation of coefficients
 
----
+
 
 ## License
 
 This repository is for educational and non-commercial use only.
 Data rights belong to their respective original sources.
 
----
+
 
