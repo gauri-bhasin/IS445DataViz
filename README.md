@@ -1,3 +1,5 @@
+Gender Pay Analysis - Glassdoor
+
 This project investigates gender-based salary disparities using Glassdoor salary data. It explores whether significant pay gaps exist between men and women across various industries and job roles. The analysis applies statistical tests and visualizations to uncover patterns and inform potential equity measures.
 
 Key Features
